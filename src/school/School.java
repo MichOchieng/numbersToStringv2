@@ -31,7 +31,7 @@ public class School {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        System.out.println("Give me a number from 1 to (but not including) 1 thousand.");
+        System.out.println("Give me a number from 1 to (but not including) 1 million.");
         Scanner sc = new Scanner(System.in);
         final int var = sc.nextInt();       
         
@@ -44,7 +44,7 @@ public class School {
     public static void decision(int x){
         if(x>=1 && x<1000000000){
             numberToString(x);
-        }
+        }        
         else{
             System.out.println("Oops! Looks like you gave me a value out of the given range. Please try again.");
         }
@@ -71,10 +71,15 @@ public class School {
                 break;    
             case 4:
                 thousands(x);
-                hundreds(x);
-                tens(x);
-                singles(x);
-                break;          
+                hundredTh(x);
+                tensTh(x);
+                singlesTh(x);
+                break;
+            case 5:
+                System.out.println("I can't do this yet ¯\\_(ツ)_/¯");
+                break;
+            default:
+                System.out.println("It looks like something went very wrong. How did you manage to get here?");
         }
     }
     public static int length(int x){
@@ -102,16 +107,37 @@ public class School {
     }   
     
 //    real methods -----------------------------
-    
+    public static void millions(int x){
+        if(x<10000000 && x>=1000000){
+            
+        }
+        else if(x<100000000 && x>=10000000){
+            
+        }
+        else if(x<1000000000 && x>=100000000){
+            
+        }
+    } 
     public static void thousands(int x){
-        if(x>999){
-            x/=1000;            
-            if(x>9){
-                tens(x);
-            }
-            else {
-                singles(x);
-            }            
+        x/=1000;
+        if(x<10){
+           singlesTh(x); 
+        }
+        else if(x==10){
+            System.out.println("ten");
+        }
+        else if(x>10 && x<100){
+           tensTh(x);
+           if(x<9 || x>19){
+              singles(x); 
+           } 
+        }
+        else if(x>99){
+           hundredTh(x);
+           tensTh(x);
+           if(x<9 || x>19){
+              singles(x); 
+           }
         }
         System.out.println("thousand");        
     }
@@ -138,6 +164,9 @@ public class School {
         if(x>19){
             x/=10;
             System.out.println(baseTenString[x]);
+        }
+        else if(x==10){
+            System.out.println("ten");
         }
         else{          
             System.out.println(tens[x]);
@@ -167,6 +196,48 @@ public class School {
             x/=10;
             System.out.println(baseTenString[x]);
         }
-    } 
+    }  
+    
+//    breaking down thousands 999 < x < 9999
+    public static void singlesTh(int x){        
+       x%=1000;
+       x%=100;
+//       stops program from printing last digit again ex. 15111 = fifteen thousand one hundred eleven one
+       if(x<9 || x>19){
+          x%=10;
+          System.out.println(singles[x]); 
+        }       
+    }
+    
+    public static void tensTh(int x){
+       x%=1000;
+       x%=100;
+       if(x<20 && x>10){
+           System.out.println(tens[x]); 
+       }
+       else{
+          x/=10;
+           System.out.println(baseTenString[x]);
+       }
+    }
+    
+    public static void hundredTh(int x){
+        x%=1000;
+        x/=100;
+        System.out.println(singles[x]);
+        if(x>0){
+          System.out.println("hundred");  
+        }
+        
+    }
 }
+
+/**
+ * Class to count w's
+ * finish millions
+ * testers to check out #s with lots of zeros
+ * fix spacing
+ * fix formatting
+ */ 
+
 
