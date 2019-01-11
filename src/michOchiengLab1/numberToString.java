@@ -24,7 +24,8 @@ public class numberToString {
     };
     private static final String singles[] ={
         "","one", "two", "three", "four", "five", "six", "seven", "eight", "nine"
-    };
+    };    
+    
 
     /**
      * @param args the command line arguments
@@ -53,7 +54,7 @@ public class numberToString {
     }
     
     
-
+//    Decides how the number will be broken down based on length
     public static void sorter(int x){
         int length = length(x);
         switch(length){
@@ -70,7 +71,7 @@ public class numberToString {
             default: System.out.println("It looks like something went very wrong. How did you manage to get here?");                
         }
     }
-    
+//    Determines the length of the given number
     public static int length(int x){
         if(x<10){
             return 1;
@@ -90,7 +91,7 @@ public class numberToString {
         return 0;
     }  
     
-//    Converts double digits to words
+//    Converts 1-99 into words
     public static String tens(int x){
         if(x>19){
             x/=10;
@@ -121,7 +122,7 @@ public class numberToString {
              return temp;                 
     } 
     
-    public static String singlesH(int x){
+    public static String singlesHundred(int x){
         x%=100;
 //    stops program from adding two at the end ex. 912 = nine hundred twelve two
         if(x<10 || x>19){
@@ -132,7 +133,7 @@ public class numberToString {
         return "";
     }
     
-    public static String tenH(int x){
+    public static String tensHundred(int x){
         x%=100;
         if(x<20 && x>10){
             String temp = tens[x];
@@ -148,39 +149,23 @@ public class numberToString {
 //    Converts thousands to words
     public static String thousands(int x){
        x/=1000;
-       if(x<10){
-           String temp = singlesH(x) + " thousand"; 
+       if(x<10 && x>0){
+           String temp = singlesHundred(x) + " thousand"; 
            return temp;
         }
-        else if(x==10){
+        else if(x==10 && x>0){
             return "ten thousand";
         }
-        else if(x>10 && x<100){
-//            ISSUE HERE
-           String temp = tensTh(x);
-          if(x<9 || x>19){
-           String temp2 = tensTh(x) + " " + singlesTh(x) + " thousand"; 
-           return temp2;
-           }
-          else{
-            return temp + " thousand";  
-          }
+        else if(x>10 && x<100 && x>0){
+            thousandHandler1(x);
         }
-        else if(x>99){
-         String temp;         
-         if(x%100<9 || x%100>19){
-             temp = hundredTh(x) + " " + tensTh(x) + " " + singlesTh(x) + " thousand";
-             return temp;           
-            }
-         else{
-             temp = hundredTh(x) + " " + tensTh(x) + " thousand";
-             return temp;
-            }
+        else if(x>99 && x>0){
+         thousandHandler2(x);
          }  
        return "";
     }
     
-    public static String singlesTh(int x){        
+    public static String singlesThousands(int x){        
        x%=1000;
        x%=100;
 //       stops program from printing last digit again ex. 15111 = fifteen thousand one hundred eleven one
@@ -192,7 +177,7 @@ public class numberToString {
        return "";
     }
     
-    public static String tensTh(int x){
+    public static String tensThousands(int x){
        x%=100;
         if(x>10 && x<20){
             String temp = tens[x];
@@ -205,7 +190,7 @@ public class numberToString {
         }
     }
     
-    public static String hundredTh(int x){
+    public static String hundredThousands(int x){
         x%=1000;
         x/=100;        
         if(x>0){
@@ -220,17 +205,17 @@ public class numberToString {
     public static String millions(int x){
        x/=1000000;
        if(x<10){
-           String temp = singlesH(x); 
+           String temp = singlesHundred(x) + " million "; 
            return temp;
         }
         else if(x==10){
             return "ten million";
         }
         else if(x>10 && x<100){
-           millionHandler1(x);
+          millionHandler1(x);
         }
         else if(x>99){
-           millionHandler2(x);
+          millionHandler2(x);
         }
        return "";        
     }     
@@ -285,10 +270,10 @@ public class numberToString {
     }    
     
 //     Used in 'million' methods
-    public static String millionHandler1(int x){       
-       if(x>10 && x<20){
-          String temp = tens[x];
-          return temp;
+    public static void millionHandler1(int x){
+        if(x>10 && x<20){
+          String temp = tens[x] + " million ";
+            System.out.print(temp); 
           }
           else{
             String temp,temp2;
@@ -296,34 +281,36 @@ public class numberToString {
             temp = baseTenString[y];
             x%=10;
             temp2 = singles[x];
-            return temp + " " + temp2;
-          }  
+            System.out.print(temp + " " + temp2 + " million ");  
+          }        
     }
     
-    public static String millionHandler2(int x){ 
-       String temp = hundreds(x) + " hundred " + tensMilion(x) + singlesMilion(x) + " million ";
-       return temp;
+    public static void millionHandler2(int x){ 
+       String temp = hundreds(x) + " hundred " + tensMilion(x) + " " + singlesMilion(x) + " million ";
+       System.out.print(temp);
     }
     
 //    Used in 'thousand' methods
-    public static String thousandHandler1(int x){
-         String temp = tensTh(x);
+    public static void thousandHandler1(int x){
+         String temp = tensThousands(x);
           if(x<9 || x>19){
-           String temp2 = tensTh(x) + " " + singlesTh(x) + " thousand"; 
-           return temp2;
+           String temp2 = tensThousands(x) + " " + singlesThousands(x) + " thousand"; 
+           System.out.print(temp2);
            }
-          else{
-            return temp + " thousand";  
-          }
+          else
+              System.out.print(temp + " thousand");          
     }
     
     public static void thousandHandler2(int x){
-        hundredTh(x);
-        tensTh(x);
-        if(x<9 || x>19){
-           singlesTh(x);
-           
-           }
+        String temp;         
+         if(x%100<9 || x%100>19){
+             temp = hundredThousands(x) + " " + tensThousands(x) + " " + singlesThousands(x) + " thousand";
+             System.out.print(temp);           
+            }
+         else{
+             temp = hundredThousands(x) + " " + tensThousands(x) + " thousand";
+             System.out.print(temp);
+            }
     }    
     
 //    Used in sorter method
@@ -340,16 +327,38 @@ public class numberToString {
     }
     
     public static void sorterCase3(int x){                      
-        System.out.println(hundreds(x) + " " + "hundred " + tenH(x) + " " + singlesH(x) );     
+     System.out.println(hundreds(x) + " " + "hundred " + tensHundred(x) + " " + singlesHundred(x) );     
     }
     
     public static void sorterCase4(int x){     
-     System.out.println(thousands(x) + " " + hundredTh(x) + " " + tensTh(x) + " " + singlesTh(x));
+     System.out.println(thousands(x) + " " + hundredThousands(x) + " " + tensThousands(x) + " " + singlesThousands(x));
     }
     
-    public static String sorterCase5(int x){
-     String temp = millions(x) + thousandMilion(x) + hundredsMilion(x) + tensMilion(x) + singlesMilion(x);   
-     return temp; 
+    public static void sorterCase5(int x){
+     System.out.println(millions(x) + " " + thousandMilion(x) + " " + hundredsMilion(x) + " " + tensMilion(x) + " " + singlesMilion(x));      
+    }   
+    
+//    methods that allow outside classes to test the numberToString method
+    public static String tensTester(int x){
+        if(x>19 || x<10){
+         String temp = tens(x);
+         String temp2 = singles(x); 
+         return(temp + " " + temp2);
+         }
+      else{
+         String temp = tens(x);
+         return(temp);
+      }       
     }
+    public static String hundredsTester(int x){
+        return hundreds(x) + " " + "hundred " + tensHundred(x) + " " + singlesHundred(x);
+    }
+    public static String thousandsTester(int x){
+        return thousands(x) + " " + hundredThousands(x) + " " + tensThousands(x) + " " + singlesThousands(x);
+    }
+    public static String millionsTester(int x){   
+        return millions(x) + " " + thousandMilion(x) + " " + hundredsMilion(x) + " " + tensMilion(x) + " " + singlesMilion(x);
+    }
+  
 }
-
+    
