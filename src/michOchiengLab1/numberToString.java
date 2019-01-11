@@ -249,10 +249,10 @@ public class numberToString {
     }
     
     public static String hundredsMilion(int x){       
-        if(x>0){
+        if(x>0 ){
           x%=1000000;
           x%=1000;          
-          String temp = hundreds(x) + " hundred ";
+          String temp = hundreds(x);
           return temp; 
         }
         else
