@@ -17,28 +17,21 @@ public class NumberToStringTester {
      private static final String ans  = "twenty one"; 
      private static final String ans1 = "nineteen";
      private static final String ans2 = "one hundred  one";
-     private static final String ans3 = "nine hundred ninety nine";
-     private static final String ans4 = "one thousand   one";
-     private static final String ans5 = "one hundred  one thousand one hundred  one";
-     private static final String ans6 = "thirteen million nine hundred  one thousand    one";
-     private static final String ans7 = "three hundred twelve  million   seven hundred  eighty nine";
-     private static final String ans8 = "nine";
-     private static final String ans9 = "";
+     private static final String ans3 = "nine hundred ninety nine";         
+     private static final String ans6 = "nine";
+     private static final String ans7 = "";     
 //     Tests
      private static final String test  = numberToString.tensTester(21);
      private static final String test1 = numberToString.tensTester(19);
      private static final String test2 = numberToString.hundredsTester(101);
-     private static final String test3 = numberToString.hundredsTester(999);
-     private static final String test4 = numberToString.thousandsTester(1001);
-     private static final String test5 = numberToString.thousandsTester(101101);
-     private static final String test6 = numberToString.millionsTester(13901001);
-     private static final String test7 = numberToString.millionsTester(312000789);
-     private static final String test8 = numberToString.singles(9);
-     private static final String test9 = numberToString.singles(0);
+     private static final String test3 = numberToString.hundredsTester(999);     
+     private static final String test6 = numberToString.singles(9);
+     private static final String test7 = numberToString.singles(0);
+     
 //     13901001 312000789 101101
     public static void main(String[] args) {
         // TODO code application logic here 
-        checker();
+        checker();        
     } 
     public static void checker(){
         if(isCorrect()){
@@ -53,26 +46,14 @@ public class NumberToStringTester {
        if(tensTest()){
            if(tensTest2()){
                if(hundredTest()){
-                   if(hundredTest2()){
-                       if(thousandTest()){
-                           if(thousandTest2()){
-                               if(millionTest()){
-                                   if(millionTest2()){
-                                       if(singlesTest()){
-                                           if(singlesTest2()){
-                                               return true;
-                                           }else
-                                            return false;
-                                       }else
-                                            return false;
-                                   }else
-                                     return false;
-                               }else
-                                 return false;
-                           }else
-                             return false;
-                       }else
-                         return false;
+                   if(hundredTest2()){                                                             
+                      if(singlesTest()){
+                          if(singlesTest2()){
+                              return true;
+                          }else
+                           return false;
+                      }else
+                           return false;                       
                    }else
                      return false;                   
                }else
@@ -118,46 +99,9 @@ public class NumberToStringTester {
          System.out.println("Error in hundredTest2");
          return false; 
        } 
-    }
-    public static boolean thousandTest(){
-      if(ans4.equals(test4)){         
-         return true;
-     }
-      else{         
-         System.out.println("Error in thousandTest");
-         return false; 
-       }  
-    }
-    public static boolean thousandTest2(){
-      if(ans5.equals(test5)){         
-         return true;
-     }
-      else{         
-         System.out.println("Error in thousandTest2");
-          System.out.println(test5);
-         return false; 
-       }  
-    }
-    public static boolean millionTest(){
-      if(ans6.equals(test6)){         
-         return true;
-     }
-      else{         
-         System.out.println("Error in millionTest");
-         return false; 
-       }  
-    }
-    public static boolean millionTest2(){
-      if(ans7.equals(test7)){         
-         return true;
-     }
-      else{         
-         System.out.println("Error in millionTest2");
-         return false; 
-       }  
-    }
+    }       
     public static boolean singlesTest(){
-      if(ans8.equals(test8)){         
+      if(ans6.equals(test6)){         
          return true;
      }
       else{         
@@ -166,7 +110,7 @@ public class NumberToStringTester {
        }  
     }
     public static boolean singlesTest2(){
-      if(ans9.equals(test9)){         
+      if(ans7.equals(test7)){         
          return true;
      }
       else{         
