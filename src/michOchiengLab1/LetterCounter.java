@@ -16,22 +16,24 @@ public class LetterCounter {
     private static final int range = 35000000;
     
     public static void main(String[] args){
-        arraySeeder();        
+        arraySeeder(); 
+        wCounter();
     }  
     
     public static void arraySeeder(){        
         for(int i = 0; i<=range;i++){
             arr.add(i);
         }
-        arr.trimToSize();
-        System.out.println(arr.get(35000000));
+        arr.trimToSize();        
     }
-    public static void wCounter(){        
-        for(int i = 0; i<=arr.size();i++){
-            if(arr.indexOf(i)%2 == 0){
+    
+    public static void wCounter(){          
+        for(int i = 0; i<=arr.size()-1;i++){
+            if(arr.get(i)%2 == 0){
                 count++;
             }            
         }
-        System.out.println("There are " + count + " w's between one and 35 million.");
+        int result = (count-1)*2;
+        System.out.println("There are " + result + " w's between one and 35 million.");
     }
 }
